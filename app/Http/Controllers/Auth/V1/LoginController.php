@@ -5,6 +5,8 @@ declare(strict_types = 1);
 namespace App\Http\Controllers\Auth\V1;
 
 use App\Http\Requests\Auth\V1\LoginRequest;
+use App\Http\Responses\TokenResponse;
+use Illuminate\Contracts\Support\Responsable;
 use Illuminate\Http\JsonResponse;
 use Mecene\Modules\Identity\Contract;
 use Symfony\Component\HttpFoundation\Response;
@@ -22,7 +24,7 @@ final readonly class LoginController
      * @param LoginRequest $request
      * @return JsonResponse
      */
-    public function __invoke(LoginRequest $request): Response
+    public function __invoke(LoginRequest $request): Responsable
     {
         $result = $this->identity->attempt(
             payload: $request->payload()
@@ -32,12 +34,9 @@ final readonly class LoginController
             throw $result->error;
         }
 
-        return new JsonResponse(
-            data: [
-                'token' => $result->value,
-                'type' => 'bearer',
-                'expires_in' => config('jwt.ttl') * 60
-            ]
+        return new TokenResponse(
+            token: $result->value,
+            status: Response::HTTP_OK
         );
     }
 }

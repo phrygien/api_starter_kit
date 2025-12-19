@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\Auth\V1;
 
 use App\Http\Requests\Auth\V1\RegistrationRequest;
+use App\Http\Responses\TokenResponse;
+use Illuminate\Contracts\Support\Responsable;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 use Mecene\Modules\Identity\Contract;
+use Symfony\Component\HttpFoundation\Response;
 
 class RegisterController
 {
@@ -20,7 +22,7 @@ class RegisterController
      * @param RegistrationRequest $request
      * @return JsonResponse
      */
-    public function __invoke(RegistrationRequest $request)
+    public function __invoke(RegistrationRequest $request): Responsable
     {
         $result = $this->identity->register(
             payload: $request->payload()
@@ -31,8 +33,9 @@ class RegisterController
             throw $result->error;
         }
 
-        return new JsonResponse(data: [
-            'token' => $result->value
-        ]);
+        return new TokenResponse(
+            token: $result->value,
+            status: Response::HTTP_CREATED
+        );
     }
 }
