@@ -9,7 +9,6 @@ use Illuminate\Contracts\Auth\Factory;
 use Mecene\Modules\Identity\Contract;
 use Mecene\Modules\Identity\DTOs\LoginObject;
 use Mecene\Support\Result;
-use PHPOpenSourceSaver\JWTAuth\Contracts\Providers\Auth;
 
 
 final readonly class IdentityService implements Contract

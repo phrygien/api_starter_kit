@@ -25,7 +25,9 @@ final readonly class LoginController
 
         return new JsonResponse(
             data: [
-                'token' => $result->value
+                'token' => $result->value,
+                'type' => 'bearer',
+                'expires_in' => config('jwt.ttl') * 60
             ]
         );
     }
