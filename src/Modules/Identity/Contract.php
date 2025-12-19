@@ -23,4 +23,10 @@ interface Contract
      * @return void
      */
     public function register(RegistrationObject $payload): Result;
+
+    /**
+     * Summary of user
+     * @return void
+     */
+    public function user(): Result;
 }

@@ -15,7 +15,7 @@ class RegisterController
      * Summary of __construct
      * @param Contract $identity
      */
-    public function __construct(private readonly Contract $identity){}
+    public function __construct(private Contract $identity){}
 
     /**
      * Summary of __invoke

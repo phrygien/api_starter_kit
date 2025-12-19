@@ -1,0 +1,20 @@
+meta {
+  name: User Conected
+  type: http
+  seq: 3
+}
+
+get {
+  url: https://api_starter_kit.test/auth/user
+  body: none
+  auth: bearer
+}
+
+auth:bearer {
+  token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL2FwaV9zdGFydGVyX2tpdC50ZXN0L2F1dGgvbG9naW4iLCJpYXQiOjE3NjYxNzU4NTEsImV4cCI6MTc2NjE3OTQ1MSwibmJmIjoxNzY2MTc1ODUxLCJqdGkiOiJHNFFjVjlvRTVBMGxyR3lDIiwic3ViIjoiMDFrY3ZnOWNtd2djNHRhenF3ejhxcTg5eXEiLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.mvtIFN4cHl-3yILI66bwb8IPtz-JOuQsNoN7Kijhr2g
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}

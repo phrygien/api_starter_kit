@@ -8,6 +8,8 @@ use App\Models\User;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Contracts\Auth\Factory;
 use Illuminate\Database\DatabaseManager;
+use Illuminate\Events\Dispatcher;
+use InvalidArgumentException;
 use Mecene\Modules\Identity\Contract;
 use Mecene\Modules\Identity\DTOs\LoginObject;
 use Mecene\Modules\Identity\DTOs\RegistrationObject;
@@ -21,7 +23,7 @@ final readonly class IdentityService implements Contract
      * @param Factory $auth
      * @param DatabaseManager $database
      */
-    public function __construct(private Factory $auth, private DatabaseManager $database)
+    public function __construct(private Factory $auth, private Dispatcher $event ,private DatabaseManager $database)
     {
         
     }
@@ -72,6 +74,8 @@ final readonly class IdentityService implements Contract
             );
         }
 
+        //$this->event->dispatch(new Registered($user));
+
         $token = $this->auth->guard('api')->attempt(
             credentials: $payload->toArray()
         );
@@ -83,9 +87,20 @@ final readonly class IdentityService implements Contract
             );
         }
 
-        return Result::ok(value: [
-            'token' => $token,
-            'users'=> $user
-        ]);
+        return Result::ok(value: $token);
+    }
+
+    public function user(): Result
+    {
+        $user = $this->auth->guard('api')->user();
+
+        if(!$user)
+        {
+            return Result::error(
+                error: new InvalidArgumentException(message: 'User not authenticated')
+            );
+        }
+
+        return Result::ok(value: $user);
     }
 }
