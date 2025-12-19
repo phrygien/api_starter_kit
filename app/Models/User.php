@@ -1,12 +1,12 @@
 <?php
 
 namespace App\Models;
+use Carbon\CarbonInterface;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Support\Carbon;
 use PHPOpenSourceSaver\JWTAuth\Contracts\JWTSubject;
 
 /**
@@ -14,8 +14,10 @@ use PHPOpenSourceSaver\JWTAuth\Contracts\JWTSubject;
  * @property string $name
  * @property string $email
  * @property string $password
- * @property ?Carbon $email_verified_at
+ * @property CarbonInterface|null $email_verified_at
  * @property string|null $remember_token
+ * @property CarbonInterface|null $created_at
+ * @property CarbonInterface|null $updated_at
  */
 class User extends Authenticatable implements MustVerifyEmail, JWTSubject
 {
