@@ -6,6 +6,11 @@ namespace Mecene\Modules\Identity\DTOs;
 
 final readonly class LoginObject
 {
+    /**
+     * Summary of __construct
+     * @param string $email
+     * @param string $password
+     */
     public function __construct(public string $email, #[\SensitiveParameter] public string $password){}
 
     /**

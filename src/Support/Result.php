@@ -8,10 +8,20 @@ use Throwable;
 
 final readonly class Result
 {
+    /**
+     * Summary of __construct
+     * @param mixed $value
+     * @param null|Throwable $error
+     */
     public function __construct(public mixed $value, public null|Throwable $error = null)
     {        
     }
 
+    /**
+     * Summary of ok
+     * @param mixed $value
+     * @return Result
+     */
     public static function ok(mixed $value): Result
     {
         return new self(
@@ -20,6 +30,11 @@ final readonly class Result
         );
     }    
 
+    /**
+     * Summary of error
+     * @param Throwable $error
+     * @return Result
+     */
     public static function error(Throwable $error): Result
     {
         return new self(
@@ -28,6 +43,10 @@ final readonly class Result
         );
     }
 
+    /**
+     * Summary of isOk
+     * @return bool
+     */
     public function isOk(): bool
     {
         return $this->error === null;

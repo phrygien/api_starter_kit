@@ -10,6 +10,10 @@ use Mecene\Modules\Identity\Services\IdentityService;
 final class IdentityServiceProvider extends ServiceProvider
 {
 
+    /**
+     * Summary of register
+     * @return void
+     */
     public function register(): void
     {
         $this->app->singleton(

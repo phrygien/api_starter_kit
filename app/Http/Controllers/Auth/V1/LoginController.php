@@ -11,8 +11,17 @@ use Symfony\Component\HttpFoundation\Response;
 
 final readonly class LoginController
 {
+    /**
+     * Summary of __construct
+     * @param Contract $identity
+     */
     public function __construct(private readonly Contract $identity){}
 
+    /**
+     * Summary of __invoke
+     * @param LoginRequest $request
+     * @return JsonResponse
+     */
     public function __invoke(LoginRequest $request): Response
     {
         $result = $this->identity->attempt(

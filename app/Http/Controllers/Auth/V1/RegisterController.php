@@ -9,8 +9,17 @@ use Mecene\Modules\Identity\Contract;
 
 class RegisterController
 {
+    /**
+     * Summary of __construct
+     * @param Contract $identity
+     */
     public function __construct(private readonly Contract $identity){}
 
+    /**
+     * Summary of __invoke
+     * @param RegistrationRequest $request
+     * @return JsonResponse
+     */
     public function __invoke(RegistrationRequest $request)
     {
         $result = $this->identity->register(

@@ -10,7 +10,17 @@ use Mecene\Support\Result;
 
 interface Contract
 {
+    /**
+     * Summary of attempt
+     * @param LoginObject $payload
+     * @return void
+     */
     public function attempt(LoginObject $payload): Result;
 
+    /**
+     * Summary of register
+     * @param RegistrationObject $payload
+     * @return void
+     */
     public function register(RegistrationObject $payload): Result;
 }
