@@ -19,6 +19,10 @@ class AppServiceProvider extends ServiceProvider
         $this->registerModules();
     }
 
+    /**
+     * Summary of registerModules
+     * @return void
+     */
     public function registerModules(): void
     {
         $this->app->register(
