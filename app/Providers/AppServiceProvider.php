@@ -2,23 +2,27 @@
 
 namespace App\Providers;
 
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\ServiceProvider;
+use Mecene\Modules\Identity\IdentityServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
 {
-    /**
-     * Register any application services.
-     */
-    public function register(): void
-    {
-        //
-    }
 
     /**
      * Bootstrap any application services.
      */
     public function boot(): void
     {
-        //
+        Model::shouldBeStrict();
+
+        $this->registerModules();
+    }
+
+    public function registerModules(): void
+    {
+        $this->app->register(
+            provider: IdentityServiceProvider::class
+        );
     }
 }
